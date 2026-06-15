@@ -1,0 +1,2 @@
+source /home/ghulamnabi/projects/hello_world/build/bootloader/gdbinit/symbols
+source /home/ghulamnabi/projects/hello_world/build/bootloader/gdbinit/connect
