@@ -1,6 +1,6 @@
 # Spycoprobe
 
-Spycoprobe is a USB programmer for TI MSP430FRxxxx devices. It receives commands from a host application via USB and interacts with an attached target device by bit-banging TI's Spy-Bi-Wire (SBW) protocol. The Spycoprobe firmware runs on Raspberry Pi's RP2040 microcontroller that is found on the Raspberry Pi Pico board.
+Spycoprobe is a USB programmer for TI MSP430FRxxxx devices. It receives commands from a host application via USB and interacts with an attached target device by bit-banging TI's Spy-Bi-Wire (SBW) protocol. The Spycoprobe firmware runs on esp32s3 microcontroller.
 
 Spycoprobe should work with all MSP430X devices. It has been tested with MSP430FR5994 and MSP430FR2433.
 
@@ -17,7 +17,7 @@ You can change the pins that are used for SBW programming on top of `src/main.c`
 
 ## Building the firmware
 
-Follow the [official instructions](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf) to install and setup the Pico SDK.
+Follow the [official instructions](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/linux-setup.html#online-installation-using-eim-cli) to install and setup the Pico SDK.
 
 Clone this repository:
 
@@ -37,13 +37,13 @@ You should now find `spycoprobe.hex` and `spycoprobe.uf2` files in the `build` d
 
 ## Flashing the firmware
 
-If you have a Raspberry Pico, disconnect it from your PC and keep pressing the `BOOTSEL` button while re-connecting the USB cable to your PC. A drive should appear on your PC. Copy the `spycoprobe.uf2` from the `build` dir onto this drive. The drive should disappear, while the bootloader flashes the new firmware. A new USB CDC ACM device should appear.
+If you have a  esp32s3, disconnect it from your PC and keep pressing the `BOOTSEL` button while re-connecting the USB cable to your PC. A drive should appear on your PC. Copy the `spycoprobe.uf2` from the `build` dir onto this drive. The drive should disappear, while the bootloader flashes the new firmware. A new USB CDC ACM device should appear.
 
 Alternatively, you can use any suitable SWD debug probe to upload the hex file to the RP2040.
 
 ## Usage
 
-Attach the Spycoprobe USB connector to your PC. Connect the `SBWTCK` and `SBWTDIO` pins of Spycoprobe (GP2 and GP3 by default) and a ground wire to your target device. Make sure that the target is supplied with a similar supply voltage as the Spycoprobe (3.3V on Raspberry Pico).
+Attach the Spycoprobe USB connector to your PC. Connect the `SBWTCK` and `SBWTDIO` pins of Spycoprobe (GP2 and GP3 by default) and a ground wire to your target device. Make sure that the target is supplied with a similar supply voltage as the Spycoprobe (3.3V on esp32s3).
 
 Install the Python package provided under `./tools` using:
 
@@ -64,5 +64,5 @@ It is planned to add support for Spycoprobe in Mspdebug, but that is still work 
 ## References
 
  - Spycoprobe is related to [Picoprobe](https://github.com/raspberrypi/picoprobe), a Rasperry Pico based SWD debug probe
- - Some inspiration for the USB protocol comes from [Mspdebug](https://dlbeer.co.nz/mspdebug/) and [Goodfet](https://goodfet.sourceforge.net/)
+
  - The SBW routines in this project are based on TI's [SLAU320AJ](https://www.ti.com/lit/ug/slau320aj/slau320aj.pdf)
